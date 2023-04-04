@@ -44,10 +44,11 @@ function Set-S1ModuleConfiguration {
 
     # Serialize Tokens as SecureString
     if ($ApiToken) {
-        $ApiTokenSecure = Protect-S1Token -String $APIToken
+        $ApiTokenSecure = ConvertTo-SecureString -String $APIToken -AsPlainText -Force
+        
     }
     if ($TemporaryToken) {
-        $TemporaryTokenSecure = Protect-S1Token -String $TemporaryToken
+        $TemporaryTokenSecure = ConvertTo-SecureString -String $TemporaryToken -AsPlainText -Force
     }
     
 

@@ -93,10 +93,10 @@ function Invoke-S1Query {
     # Build request headers and add to request
     $Headers = @{}
     if ($Script:PSSentinelOne.ApiToken) {
-        $ApiToken = Unprotect-S1Token -String $Script:PSSentinelOne.ApiToken
+        $ApiToken = ConvertFrom-SecureString $Script:PSSentinelOne.ApiToken -AsPlainText
         $Headers.Add("Authorization", "ApiToken $ApiToken")
     } elseif ($Script:PSSentinelOne.TemporaryToken) {
-        $TemporaryToken = Unprotect-S1Token -String $Script:PSSentinelOne.TemporaryToken
+        $TemporaryToken = ConvertFrom-SecureString $Script:PSSentinelOne.TemporaryToken -AsPlainText
         $Headers.Add("Authorization", "Token $TemporaryToken")
     }
     $Request.Add("Headers", $Headers)
