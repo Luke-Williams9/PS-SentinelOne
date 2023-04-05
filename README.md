@@ -23,18 +23,20 @@ In this fork, I've replaced the Protect / Unprotect API key functions with Conve
 ----------
 ## Installation and Removal
 
-**One LIner Install multiplatform**
-$ModuleName='PS-SentinelOne';$parentFldr='PS-SentinelOne-master';$u='https://github.com/Luke-Williams9/PS-SentinelOne/archive/refs/heads/master.zip';If($IsWindows){$s=';'}else{$s=':'};$mp=($Env:PSModulePath.split($s) -like "$HOME*")[0];$td='.'+$ModuleName+'_temp';$tempdir=Join-Path '~' $td;$z=Join-Path $tempdir ($ModuleName + '.zip');New-Item -path '~' -name $td -type 'directory' -ErrorAction SilentlyContinue;Invoke-WebRequest -Uri $u -OutFile $z;Expand-Archive $z -DestinationPath $tempdir -Force;New-Item -path $mp -name $ModuleName -ItemType 'directory' -ErrorAction SilentlyContinue;Copy-Item (Join-Path $tempdir $parentFldr $moduleName) -Destination $mp -Force -Recurse;Get-Module -listAvailable $ModulePath
+**One Liner Install multiplatform**
+```powershell
+$ModuleName='PS-SentinelOne';$parentFldr='PS-SentinelOne-master';$u='https://github.com/Luke-Williams9/PS-SentinelOne/archive/refs/heads/master.zip';If($IsWindows){$s=';'}else $s=':'};$mp=($Env:PSModulePath.split($s) -like "$HOME*")[0];$td='.'+$ModuleName+'_temp';$tempdir=Join-Path '~' $td;$z=Join-Path $tempdir ($ModuleName + '.zip');New-Item -path '~' -name $td -type 'directory' -ErrorAction SilentlyContinue;Invoke-WebRequest -Uri $u -OutFile $z;Expand-Archive $z -DestinationPath $tempdir -Force;New-Item -path $mp -name $ModuleName -ItemType 'directory' -ErrorAction SilentlyContinue;Copy-Item (Join-Path $tempdir $parentFldr $moduleName) -Destination $mp -Force -Recurse;Get-Module -listAvailable $ModuleName
+```
 
 
 Installation of this module currently consists of a pair of scripts that will copy the module to one of the PowerShell module paths, and check PowerShell module paths to remove it.
 
-**Install**
+**Install Script**
 ```PowerShell
 .\Install-Module.ps1
 ```
 
-**Uninstall**
+**Uninstall Script**
 ```PowerShell
 .\Uninstall-Module.ps1
 ```
